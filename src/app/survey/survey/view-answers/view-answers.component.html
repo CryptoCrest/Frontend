@@ -1,0 +1,47 @@
+<app-header> </app-header>
+
+<!-- Main Content -->
+<div class="main_div" style="background-image:url('../../assets/work.png');height: 850px;">
+    <main class="container_div" style="padding-top: 40px;height: 850px;">
+        <div class="container_header">    
+            <h1>Survey Responses </h1>
+    </div>
+
+        <div class="table">
+            <br>
+            <table id="exceltable">
+                <!-- Header Row-->
+                <tr style="background-color: #3385ff; color: white; font-weight:bolder;">
+                    <th>Respondent: {{item.surveyAnswers.length}}</th>
+                    <th>Responses</th>
+                </tr>
+               
+                <!-- Repeatable Template Row -->
+                <tr *ngFor="let completed of item.surveyAnswers">
+                    <td> {{completed.respondent}}</td>
+                    <td>
+                    <ul>
+                      <li *ngFor="let ques of completed.answers">{{ques.question}}&nbsp;&nbsp;{{ques.answer}} </li>
+                   
+                   </ul>
+                   </td>
+            </tr>     
+
+            </table>
+           <button (click)="exportexcel()">Export to Excel</button>
+           <button routerLink="/survey/list" ><i class="fas fa-arrow-circle-left"></i> Back to the Survey list </button>
+            <app-footer> </app-footer>
+        </div>
+    </main>
+</div>
+
+<style>
+   tr:nth-child(odd) {
+  background-color: rgba(204, 204, 255,0.6);
+  color: black;
+}
+   
+      </style>
+
+
+<!-- <%- include ../partials/footer.ejs %> -->

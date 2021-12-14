@@ -1,0 +1,108 @@
+ <!-- <%- include ../partials/header.ejs %> -->
+<app-header> </app-header>
+
+<!-- Main Content -->
+<div class="main_div" style="background-image:url('../../assets/work.png');height: 850px;">
+    <main class="container_div" style="padding-top: 40px;height: 850px;">
+        <div class="container_header">
+
+            <h1><i class="fas fa-poll-h" style="color: #8caee0;"></i> Survey List</h1>
+        </div>
+        <div>
+            <div>
+                
+                <a routerLink="/survey/add" class="btn btn-primary align-self-end" role="button" style="background-color: #71a3ee; border-color: #71a3ee; color: rgb(255, 255, 255); font-weight: bolder;">
+                    <i class="fas fa-plus-circle"></i>
+                    Add a new Survey
+                </a>
+                <br/><br/>
+            </div>
+            
+        </div>
+
+        <div class="table ">
+            <br>
+            <table>
+                <!-- Header Row-->
+                <tr style="background-color: #3385ff; color:aliceblue; font-weight:bolder;">
+                    <th>Survey Name</th>
+                    <!-- <th>Number of questions</th> -->
+                    <th>Description</th>
+                    <th>Creator</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th colspan="5">Actions</th>
+                </tr>
+
+                <!-- Repeatable Template Row -->
+
+                <tr *ngFor="let item of surveyList">
+                    <td>{{item.item }}</td>
+                    <!-- <td>{{item.surveyQuestions.length }}</td> -->
+                    <td>{{item.status }}</td>
+                    <td>{{item.creator}}</td>
+                    <td>{{item.startDate | date: 'yyyy-MM-dd'}}</td>
+                    <td>{{item.endDate | date: 'yyyy-MM-dd'}}</td>
+
+                    <td class="text-center">
+                        <!-- <a href="/survey/edit/{{item._id }}" class="btn btn-primary btn-sm"> -->
+
+                            <!--
+                        <a [routerLink]="['/survey/edit/', item._id]" style="margin: 0%;" class="btn bg-primary btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        -->
+                        
+                        <button [disabled]="item.creator!==this.username" [routerLink]="['/survey/edit/', item._id]" class="btn btn-info" style="width: auto; color: white; background-color: #1a75ff; border-radius: 8px; border: none;" >
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    
+
+                    </td>
+                    <td class="text-center">
+                        <!-- <a href="/survey/delete/{{item._id }}" class="btn btn-danger btn-sm"> -->
+                            <!--
+                        <a (click)="deleteMethod(item._id)" style="margin: 0%;" class="btn bg-danger btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i></a>
+                        -->
+
+                            <button [disabled]="item.creator!==this.username" (click)="deleteMethod(item._id)" class="btn btn-info" style="width: auto; color: white; background-color: #ff3333; border-radius: 8px; border: none;" >
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                    </td>
+
+                    <td class="text-center">
+                        <!-- <a href="/survey/delete/{{item._id }}" class="btn btn-danger btn-sm"> -->
+                        <button [disabled]="item.creator!==this.username" [routerLink]="['/addQues', item._id]" class="btn btn-secondary" style="width: 100px; height: 20%; background-color: salmon; border-color: salmon;">Add Questions</button>
+                    </td>
+
+                    <td class="text-center">
+                        <button [disabled]="item.endDate<todayDate" [routerLink]="['/viewQues', item._id]" class="btn btn-info" style="width: 100px; height: 20%;">Answer Questions</button>
+                    </td>
+
+                    <td class="text-center">
+                       
+                        <button [disabled]="item.creator!==this.username" [routerLink]="['/viewAns', item._id]" class="btn btn-secondary" style="width: 100px; height: 20%;">View Answers</button>
+                   
+                    </td>
+
+                </tr>
+
+            </table>
+           
+            <app-footer> </app-footer>
+        </div>
+    </main>
+</div>
+
+<style>
+   tr:nth-child(odd) {
+  background-color: rgba(204, 204, 255,0.6);
+  color: black;
+}
+   
+      </style>
+
+
+<!-- <%- include ../partials/footer.ejs %> -->
