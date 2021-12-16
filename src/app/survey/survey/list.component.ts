@@ -1,4 +1,5 @@
 import { DatePipe } from "@angular/common";
+import { isNgTemplate } from "@angular/compiler";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import * as moment from "moment";
@@ -14,6 +15,7 @@ import { SurveyRepository } from "../../model/survey.repository";
 export class ListComponent {
     username:string;
     todayDate:Date=new Date();
+    buttonDisabled: boolean;
 
     constructor(private repository: SurveyRepository,
         private router: Router,
@@ -31,6 +33,14 @@ export class ListComponent {
         if(confirm("Are you sure do you want to delete?")) {
             this.router.navigateByUrl("survey/delete/"+id);
         }
+    }
+
+    checkDate(item:Survey) :boolean{
+        if(item.startDate.getTime()>this.todayDate.getTime()){
+            this.buttonDisabled= true
+            // this.deleteMethod(item._id)
+        }       
+        return this.buttonDisabled;
     }
     
 }

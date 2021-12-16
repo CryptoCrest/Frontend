@@ -80,7 +80,7 @@
                     <td class="text-center">
                         <button [disabled]="item.endDate<todayDate" [routerLink]="['/viewQues', item._id]" class="btn btn-info" style="width: 100px; height: 20%;">Answer Questions</button>
                     </td>
-
+                    <!-- item.endDate<todayDate  checkDate(item) -->
                     <td class="text-center">
                        
                         <button [disabled]="item.creator!==this.username" [routerLink]="['/viewAns', item._id]" class="btn btn-secondary" style="width: 100px; height: 20%;">View Answers</button>
